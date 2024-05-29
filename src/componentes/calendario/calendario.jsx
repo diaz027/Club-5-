@@ -11,23 +11,23 @@ const Calendar = () => {
 
   useEffect(() => {
     const days = [];
-    const firstDayOfMonth = new Date(year, mes, 1).getDay();//meda el dia/mes/año actual
-    const prevMonthLastDate = new Date(year, mes, 0).getDate();//vuelve para atras hasta su fecha actual
-    const lastDayOfMonth = new Date(year, mes + 1, 0).getDate();//me muevo al proximo mes
+    const listaCompleta = new Date(year, mes, 1).getDay();//meda el dia/mes/año actual
+    const calendarioInicial = new Date(year, mes, 0).getDate();//vuelve para atras hasta su fecha actual
+    const diasAntes = new Date(year, mes + 1, 0).getDate();
 
-    for (let i = 1; i <= firstDayOfMonth; i++) {
-      days.unshift({ dia: prevMonthLastDate - i + 1, diaSemana: firstDayOfMonth - i, opacity: true });
+    for (let i = 1; i <= listaCompleta; i++) {
+      days.unshift({ dia: calendarioInicial - i + 1, diaSemana: listaCompleta - i, opacity: true });
     }
 
-    for (let i = 1; i <= lastDayOfMonth; i++) {
+    for (let i = 1; i <= diasAntes; i++) {
       let fecha = new Date(year, mes, i);
       let diaSemana = fecha.getDay();
       days.push({ dia: i, diaSemana });
     }
 
-    const lastDayOfWeek = days[days.length - 1].diaSemana;
-    for (let i = 1; i <= 6 - lastDayOfWeek; i++) {
-      days.push({ dia: i, diaSemana: lastDayOfWeek + i, opacity: true });
+    const diasMesProximo = days[days.length - 1].diaSemana;
+    for (let i = 1; i <= 6 - diasMesProximo; i++) {
+      days.push({ dia: i, diaSemana: diasMesProximo + i, opacity: true });
     }
 
     setDias(days);
