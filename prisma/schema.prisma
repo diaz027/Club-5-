@@ -15,19 +15,20 @@ datasource db {
 
 model Reservas {
   id     Int      @id @default(autoincrement())
-  title  String
   dia    String
   hora   String
   mes    String
   decada Int
   price  Float
   type   String
+  active Boolean
   ventas Ventas[] @relation("ReservasToVentas")
 }
 
 model Ventas {
-  id       Int        @id @default(autoincrement())
-  nombre   String
-  cel      String
-  reservas Reservas[] @relation("ReservasToVentas")
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  cel       String
+  reservaId Int
+  reservas  Reservas[] @relation("ReservasToVentas")
 }
